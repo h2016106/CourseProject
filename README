@@ -1,0 +1,65 @@
+ Linux Device Driver for interfacing accelerometer using Raspberry Pi
+
+Introduction -
+The ADXL345 is a small, thin, low power, 3-axis accelerometer with high resolution (13-bit) measurement at up to ±16 g. 
+Digital output data is formatted as 16-bit twos complement and is accessible through either a SPI (3- or 4-wire) or 
+I2 C digital interface. The ADXL345 is well suited for mobile device applications. It measures the static acceleration 
+of gravity in tilt-sensing applications, as well as dynamic acceleration resulting from motion or shock. 
+Its high resolution (4 mg/LSB) enables measurement of inclination changes less than 1.0°. 
+Several special sensing functions are provided. 
+Activity and inactivity sensing detect the presence or lack of motion and if the acceleration on any axis 
+exceeds a user-set level. Tap sensing detects single and double taps. Free-fall sensing detects if the device is falling. 
+These functions can be mapped to one of two interrupt output pins. An integrated, patent pending 32-level first in, first out
+(FIFO) buffer can be used to store data to minimize host processor intervention. 
+
+Purpose of Code 
+Code adxl.c specifies linux device driver for interfacing ADXL345 digital accelerometer module with raspberry pi board.
+Actually, we were on a mobile phone project and accelerometer sensor is one part of that. The role of this sensor is to 
+provide the  auto rotate feature present in our mobile phone. So, as we tilt the accelerometer module it gives the 
+corresponding axis readings and as soon as the tilt reading ( of respective axis) crosses a certain thresold, screen is 
+rotated. Thus, via this code I have demonstrated that how the readings are changing as we are providing tilt to our 
+accelerometer.
+
+How to use code
+
+In order to use code following steps are to be performed - 
+- first of all make sure that i2c drivers are installed in your system.
+
+Now steps to execute -
+1. Get whole project into a folder and point your directory path towards it.
+2. run >> make all
+3 Insert the module using >> sudo insmod adxl.ko
+4 To check whether i2c device (here accelerometer)  is been detected or not run
+ >> sudo i2cdetect -y 1 // This wil point out the address of the i2c device (0x53 in case of accelerometer ) if it is detected.
+4. Finally, for demo of driver run the python script using
+                                                                                           >> sudo python script.py
+Result – Tilting of the accelerometer will give varying reading of x- , y- . and z- axis .
+
+Applications of ADXL345
+Mobile Handsets,
+ Medical instrumentation Gaming and pointing devices,
+ Industrial instrumentation,
+ Personal navigation devices,
+ Hard disk drive (HDD) protection,
+ Fitness equipment  
+
+Problems occured while building code - 
+Linux headers not installed -  We faced this issue while building our code, to ovecome this a set of command need to be run, 
+these may solve the problem - 
+Command are -
+>> sudo apt-get update
+>> sudo apt-get upgrade 
+  (now reboot the system)
+>>  sudo apt-get install build-essentials linux-headers-$(uname -r)
+ 
+Enabling i2c -  The new Raspbian may have the I2C driver installed but they are disabled by default. 
+To enable it all you need to do is comment out a line by putting # in front. At the prompt type.
+>> sudo nano /etc/modprobe.d/raspi-blacklist.conf
+Then add # to start of third line
+
+Now install the i2c-tools package by:
+>> sudo apt-get install i2c tools
+( for more detailed information , you care refer to this - http://skpang.co.uk/blog/archives/575 )
+
+
+
