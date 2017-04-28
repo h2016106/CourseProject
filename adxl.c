@@ -23,17 +23,17 @@
 
 //Register definitions
 #define REG_INT_ENABLE 0x2E // INT_ENABLE register address
-#define REG_INT_SOURCE 0x30
+#define REG_INT_SOURCE 0x30 // source of interrupts
 #define REG_DATAX0 0x32    // reading FIFO registers
-#define REG_DATAX1 0x33
-#define REG_DATAY0 0x34
-#define REG_DATAY1 0x35
-#define REG_DATAZ0 0x36
-#define REG_DATAZ1 0x37
+#define REG_DATAX1 0x33    // x axis data 1
+#define REG_DATAY0 0x34	   // y axis data 0
+#define REG_DATAY1 0x35    // y axis data 1
+#define REG_DATAZ0 0x36    // z axis data 0
+#define REG_DATAZ1 0x37    // z axis data 1
 #define REG_DEVID 0x00  //device id,access to accelerometer is verified by reading DEVID registe
-#define REG_DATA_FORMAT 0x31
-#define REG_POWER_CTL 0x2D
-#define REG_INT_MAP 0x2F
+#define REG_DATA_FORMAT 0x31  //data format control
+#define REG_POWER_CTL 0x2D    // Power control register
+#define REG_INT_MAP 0x2F      // Interrupt mapping control
 
 #define INT_GPIO 27
 
